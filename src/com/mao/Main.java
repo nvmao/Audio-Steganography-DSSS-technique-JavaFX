@@ -50,7 +50,7 @@ public class Main extends Application {
             f = width / wave.size();
         }
         if(spread != null){
-            scale = 10;
+//            scale = 10;
             f = 2;
 
             wave = spread;
@@ -63,6 +63,8 @@ public class Main extends Application {
         gc.setFill(Color.RED);
         gc.setLineWidth(1);
 
+
+        //java swing canvas
 
         float x = 0;
         for(int i =0 ;i < wave.size()-500; i++){

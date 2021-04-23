@@ -42,6 +42,9 @@ public class Encoder {
 
     public Encoder(String message,long key, File originalAudioFile) {
         this.message = message.trim();
+        if(this.message.length() % 2 != 0){
+            this.message += " ";
+        }
         this.key = key;
         this.originalAudioFile = originalAudioFile;
     }
@@ -121,9 +124,10 @@ public class Encoder {
         // embed
         for(int i =0 ; i < samplesWave.size();i++){
             if(spreadSequences.get(i) == -1){
-                samplesWave.set(i,0.1f);
+                samplesWave.set(i,0.000001f);
             }
         }
+
 
         System.out.println("sample waves: ");
         for(int i = 0; i < 10;i++){

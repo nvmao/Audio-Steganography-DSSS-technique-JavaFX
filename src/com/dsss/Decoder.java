@@ -30,7 +30,9 @@ public class Decoder {
 
 
     public void decode() throws Exception {
+
         ArrayList<Float> samplesWave = Common.getWaveFromAudio(encodeAudioFile);
+
         int[] pnSequence = Common.pnSequenceKey(key,samplesWave.size());
         System.out.println(pnSequence.length);
 
@@ -49,7 +51,6 @@ public class Decoder {
             }
 
         }
-//        lowest_value = 0.0000008f;
 
         System.out.println("low: " + lowest_value);
 
@@ -69,7 +70,7 @@ public class Decoder {
         int[] data = new int[samplesWave.size()];
         for(int i = 0; i < spreadSequences.length ; i ++){
             data[i] = spreadSequences[i] * pnSequence[i];
-//            System.out.print(data[i] +" ") ;
+            System.out.print(data[i] +" ") ;
         }
         System.out.println();
 
@@ -90,17 +91,17 @@ public class Decoder {
 
         int message_byte[] = new int[data.length / number_per_byte];
         int m = 0;
-        for(int i = 0 ;i < data.length;i++){
-            if(i % number_per_byte == 0){
-                message_byte[m] = data[i] == -1 ? 0 : 1 ;
-                System.out.print(message_byte[m]);
-                m++;
-                if(m >= message_byte.length){
-                    break;
+        try{
+            for(int i = 0 ;i < data.length;i++){
+                if(i % number_per_byte == 0){
+                    message_byte[m] = data[i] == -1 ? 0 : 1 ;
+                    System.out.print(message_byte[m]);
+                    m++;
                 }
             }
+        }catch (Exception e){
+
         }
-        System.out.println();
 
 
         this.decodedMessage = BinaryTool.binaryToString(message_byte);
